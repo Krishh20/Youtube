@@ -1,0 +1,29 @@
+
+ import express from "express";
+
+ import dotenv from "dotenv"
+ import cors from "cors"
+ import watchRouter from "./routes/watch.route.js"
+ dotenv.config();
+
+ const port = process.env.PORT;
+
+ const app = express();
+ app.use(cors({
+ allowedHeaders: ["*"],
+ origin: "*"
+ }));
+
+ app.use(express.json());
+
+ app.use('/watch', watchRouter);
+
+ app.get('/', (req, res) => {
+ res.json({
+    msg:"working"
+ })
+ })
+
+ app.listen(port, () => {
+console.log("listening");
+ })

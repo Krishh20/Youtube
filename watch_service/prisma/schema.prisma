@@ -1,0 +1,19 @@
+// created db folder db.js paste importing code
+//migrate is used to create table
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+ model VideoData {
+ id Int @id @default(autoincrement())
+ title String
+ description String?
+ author String
+ url String
+ }
