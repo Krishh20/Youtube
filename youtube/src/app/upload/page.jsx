@@ -1,12 +1,13 @@
  "use client"
  import React, { useState } from 'react';
+ import { useRouter } from 'next/navigation';
  import { useEffect } from 'react';
  import { useSession } from 'next-auth/react';
  import { redirect } from 'next/navigation';
  import axios from 'axios';
 
  const UploadForm = () => {
-
+const router=useRouter()
  const [selectedFile, setSelectedFile] = useState(null);
  const [title, setTitle] = useState('');
  const [description, setDescription] = useState('');
@@ -90,6 +91,7 @@ title: title,
  author: author
  });
  console.log(completeRes.data);
+  router.push("/");
  } catch (error) {
  console.error('Error uploading file:', error);
  }

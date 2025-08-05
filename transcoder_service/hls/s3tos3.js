@@ -76,7 +76,7 @@ const s3ToS3 = async (mp4FileName) => {
             `-hls_list_size 0`,
             `-hls_segment_filename hls/${segmentFileName}`
           ])
-          .output(`hls/${outputFileName}`)
+          .output(`hls/${outputFileName}`) //hls intsead of output hls folder is created
           .on('end', () => resolve())
           .on('error', (err) => reject(err))
           .run();

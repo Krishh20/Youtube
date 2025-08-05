@@ -1,0 +1,8 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 6, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"","debugId":null}},
+    {"offset": {"line": 24, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/krish/OneDrive/Documents/YOUTUBE/youtube/src/app/pages/Room.jsx"],"sourcesContent":["\r\n\r\nimport React from 'react'\r\nimport ReactPlayer from 'react-player'\r\nconst Room = () => {\r\n  return (\r\n    <div>\r\n      <ReactPlayer url='https://www.youtube.com/watch?v=LXb3EKWsInQ' />\r\n    </div>\r\n  )\r\n}\r\n\r\nexport default Room\r\n"],"names":[],"mappings":";;;;AAEA;AACA;;;;AACA,MAAM,OAAO;IACX,qBACE,8OAAC;kBACC,cAAA,8OAAC,+IAAA,CAAA,UAAW;YAAC,KAAI;;;;;;;;;;;AAGvB;uCAEe","debugId":null}},
+    {"offset": {"line": 55, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/krish/OneDrive/Documents/YOUTUBE/youtube/src/app/page.js"],"sourcesContent":["import Room from \"./pages/Room\"\n\nexport default function Home() {\n  return (\n    <div>\n    <Room></Room>\n    </div>\n  );\n}\n"],"names":[],"mappings":";;;;AAAA;;;AAEe,SAAS;IACtB,qBACE,8OAAC;kBACD,cAAA,8OAAC,4HAAA,CAAA,UAAI;;;;;;;;;;AAGT","debugId":null}}]
+}

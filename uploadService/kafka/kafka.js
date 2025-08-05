@@ -3,6 +3,7 @@
  import path from "path"
  class KafkaConfig {
  constructor(){
+console.log("BROKERURL:", process.env.BROKERURL);
  this.kafka = new Kafka({
  clientId: process.env.CLIENTID,   // changed broker and password, change to sasl service setting, overview copy broker nd pasw
  brokers: [process.env.BROKERURL],

@@ -8,7 +8,7 @@ const SearchBar = () => {
   const searchVideos = async () => {
     try {
       const res = await axios.get(
-        "https://fffiqlakmg.execute-api.ap-south-1.amazonaws.com/search",
+        "https://96ws7w3y4k.execute-api.ap-south-1.amazonaws.com/search",
         { params: { q: searchText } }
       );
       console.log("Data received-", res.data);

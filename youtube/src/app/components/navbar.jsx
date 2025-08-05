@@ -1,5 +1,6 @@
 "use client"
 import React from "react";
+
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import SearchBar from "./searchbar";
@@ -7,7 +8,7 @@ import SearchBar from "./searchbar";
 const NavBar = () => {
   const router = useRouter();
   const { data } = useSession();
-  console.log("data----------", data);
+  console.log(" auth data----------", data);
   const goToUpload = () => {
     router.push("/upload");
   };

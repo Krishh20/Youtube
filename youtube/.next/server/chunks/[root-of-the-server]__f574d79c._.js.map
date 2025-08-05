@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 6, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"","debugId":null}},
+    {"offset": {"line": 140, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/krish/OneDrive/Documents/YOUTUBE/youtube/src/app/api/auth/%5B...nextauth%5D/route.js"],"sourcesContent":[" import NextAuth from \"next-auth\"\r\n import GoogleProvider from \"next-auth/providers/google\";\r\n const handler = NextAuth({\r\n providers: [\r\n GoogleProvider({\r\n clientId: process.env.GOOGLE_CLIENT_ID,\r\n clientSecret: process.env.GOOGLE_CLIENT_SECRET,\r\n//   params: {   // this is added, if signout it remove token from cookies and need to sign again, w/o this no need to signin again\r\n//           prompt: \"consent\",\r\n//           access_type: \"offline\",\r\n//           response_type: \"code\"\r\n//         }\r\n })\r\n ]\r\n })\r\n export { handler as GET, handler as POST }"],"names":[],"mappings":";;;;AAAC;AACA;;;AACA,MAAM,UAAU,CAAA,GAAA,uIAAA,CAAA,UAAQ,AAAD,EAAE;IACzB,WAAW;QACX,CAAA,GAAA,qJAAA,CAAA,UAAc,AAAD,EAAE;YACf,UAAU,QAAQ,GAAG,CAAC,gBAAgB;YACtC,cAAc,QAAQ,GAAG,CAAC,oBAAoB;QAM9C;KACC;AACD","debugId":null}}]
+}

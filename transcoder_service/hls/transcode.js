@@ -24,28 +24,28 @@ import ffmpeg from "fluent-ffmpeg"
  const variantPlaylists = [];
  for (const { resolution, videoBitrate, audioBitrate } of resolutions) {
  console.log(`HLS conversion starting for ${resolution}`);
- const outputFileName = `${mp4FileName.replace(
+ const outputFileName = `${mp4FileName.replace(   //how file name should appear
  '.',
  '_'
  )}_${resolution}.m3u8`;
 const segmentFileName = `${mp4FileName.replace(
  '.',
  '_'
- )}_${resolution}_%03d.ts`;
+ )}_${resolution}_%03d.ts`;  //_%03d- 001 002
  await new Promise((resolve, reject) => {
  ffmpeg('test.mp4')
  .outputOptions([
- `-c:v h264`,
+ `-c:v h264`,         //video codec format, shrinks video to store
  `-b:v ${videoBitrate}`,
- `-c:a aac`,
+ `-c:a aac`,  //audio format
  `-b:a ${audioBitrate}`,
  `-vf scale=${resolution}`,
  `-f hls`,
- `-hls_time 10`,
- `-hls_list_size 0`,
- `-hls_segment_filename output/${segmentFileName}`
+ `-hls_time 10`,  //how long chunk is of, 10sec
+ `-hls_list_size 0`,  //now we have fixed no. of chunks, but incase of livestreaming dont kmnow how many chunks need,
+ `-hls_segment_filename output/${segmentFileName}` //so we define a list size whn exceeded it get replaces by new one
  ])
- .output(`output/${outputFileName}`)
+ .output(`output/${outputFileName}`) //a bit doubt
  .on('end', () => resolve())
  .on('error', (err) => reject(err))
  .run();

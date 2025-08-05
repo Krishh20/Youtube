@@ -6,7 +6,7 @@
  import watchRouter from "./routes/watch.route.js"
  dotenv.config();
 
- const port = process.env.PORT;
+ const port = process.env.PORT || 8082;
 
  const app = express();
  app.use(cors({

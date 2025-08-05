@@ -7,7 +7,7 @@ import KafkaConfig from "./kafka/kafka.js"
 dotenv.config();
 
 const app=express();
-const port=process.env.PORT || 8001;
+const port= 8080;
 app.use(cors({
     allowedHeaders: ["*"],
  origin: "*"

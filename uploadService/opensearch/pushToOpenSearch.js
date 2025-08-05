@@ -7,7 +7,11 @@
  var host =process.env.HOST
  var host_aiven =process.env.AIVENHOST
  var client = new Client({
- node: host_aiven
+ node: host,
+ auth: {
+    username: process.env.USERNAME,
+    password: process.env.PASSWORD
+  }
  });
  var index_name = "video";
  var document = {
@@ -26,7 +30,7 @@
  console.log(response.body);
  } catch (error) {
  // Respond with error message
- console.log(error.message)
+ console.log("host url is"," ",error.message)
 }
  };
  export default PushToOpenSearch;
