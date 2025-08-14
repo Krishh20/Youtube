@@ -4,6 +4,7 @@ import axios from "axios";
 import dynamic from "next/dynamic";
 import NavBar from "../components/navbar";
 import { useVideosStore } from "../zustand/useVideosStore";
+import VideoPlayer from "./videoplayer";
 const ReactPlayer = dynamic(() => import("react-player"), { ssr: false }); //for playing video and dynamic for only client side rendering
 const YouTubeHome = () => {
   const [videos, setVideos] = useState([]);
@@ -46,12 +47,14 @@ const YouTubeHome = () => {
                   className="border rounded-md overflow-hidden"
                 >
                   <div>
-                    <ReactPlayer
-                      url={video._source.videoUrl}
+                        {
+                    video.transcodedUrl? <VideoPlayer transcodedUrl={video.transcodedUrl}></VideoPlayer>: <ReactPlayer
+                      url={video.url}
                       width="360px"
                       height="180px"
-                      controls={true} // to get utube control like play pause forward
+                      controls={true}
                     />
+                   }
                   </div>
                   <div className="p-4">
                     <h2
@@ -79,12 +82,14 @@ const YouTubeHome = () => {
                   className="border rounded-md overflow-hidden"
                 >
                   <div>
-                    <ReactPlayer
+                   {
+                    video.transcodedUrl? <VideoPlayer transcodedUrl={video.transcodedUrl}></VideoPlayer>: <ReactPlayer
                       url={video.url}
                       width="360px"
                       height="180px"
                       controls={true}
                     />
+                   }
                   </div>
                   <div className="p-4">
                     <h2

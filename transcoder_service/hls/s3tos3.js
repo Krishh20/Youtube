@@ -1,70 +1,74 @@
 import dotenv from "dotenv";
- import AWS from 'aws-sdk';
- import fs from "fs";
- import path from "path";
- import ffmpeg from "fluent-ffmpeg"
- import ffmpegStatic from "ffmpeg-static"
- ffmpeg.setFfmpegPath(ffmpegStatic)
- dotenv.config();
- const s3 = new AWS.S3({
- accessKeyId: process.env.AWS_ACCESS_KEY_ID,
- secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
- });
+import AWS from "aws-sdk";
+import fs from "fs";
+import path from "path";
+import ffmpeg from "fluent-ffmpeg";
+import ffmpegStatic from "ffmpeg-static";
+ffmpeg.setFfmpegPath(ffmpegStatic);
+dotenv.config();
+const s3 = new AWS.S3({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+});
 
- const bucketName = process.env.AWS_BUCKET;
- const hlsFolder = 'hls';
-
+const bucketName = process.env.AWS_BUCKET;
+const hlsFolder = "hls";
 
 const s3ToS3 = async (mp4FileName) => {
-  console.log('Starting script');
-  console.time('req_time');
+  console.log("Starting script");
+  console.time("req_time");
 
   try {
-    // Create hls directory if it doesn't exist
     if (!fs.existsSync(hlsFolder)) {
       fs.mkdirSync(hlsFolder);
     }
 
-    console.log('Downloading s3 mp4 file locally');
+    console.log("Downloading s3 mp4 file locally");
     const mp4FilePath = `${mp4FileName}`;
-    const writeStream = fs.createWriteStream('local.mp4');
+    const writeStream = fs.createWriteStream("local.mp4");
     const readStream = s3
       .getObject({ Bucket: bucketName, Key: mp4FilePath })
       .createReadStream();
 
     readStream.pipe(writeStream);
     await new Promise((resolve, reject) => {
-      writeStream.on('finish', resolve);
-      writeStream.on('error', reject);
+      writeStream.on("finish", resolve);
+      writeStream.on("error", reject);
     });
-    console.log('Downloaded s3 mp4 file locally');
+    console.log("Downloaded s3 mp4 file locally");
 
     const resolutions = [
       {
-        resolution: '320x180',
-        videoBitrate: '500k',
-        audioBitrate: '64k'
+        resolution: "320x180",
+        videoBitrate: "500k",
+        audioBitrate: "64k",
       },
       {
-        resolution: '854x480',
-        videoBitrate: '1000k',
-        audioBitrate: '128k'
+        resolution: "854x480",
+        videoBitrate: "1000k",
+        audioBitrate: "128k",
       },
       {
-        resolution: '1280x720',
-        videoBitrate: '2500k',
-        audioBitrate: '192k'
-      }
+        resolution: "1280x720",
+        videoBitrate: "2500k",
+        audioBitrate: "192k",
+      },
     ];
 
     const variantPlaylists = [];
     for (const { resolution, videoBitrate, audioBitrate } of resolutions) {
       console.log(`HLS conversion starting for ${resolution}`);
-      const outputFileName = `${mp4FileName.replace('.', '_')}_${resolution}.m3u8`;
-      const segmentFileName = `${mp4FileName.replace('.', '_')}_${resolution}_%03d.ts`;
+      const outputFileName = `${mp4FileName.replace(
+        ".",
+        "_"
+      )}_${resolution}.m3u8`;
+      const segmentFileName = `${mp4FileName.replace(
+        ".",
+        "_"
+      )}_${resolution}_%03d.ts`;
 
       await new Promise((resolve, reject) => {
-        ffmpeg('./local.mp4')
+        ffmpeg("./local.mp4")
           .outputOptions([
             `-c:v h264`,
             `-b:v ${videoBitrate}`,
@@ -74,11 +78,11 @@ const s3ToS3 = async (mp4FileName) => {
             `-f hls`,
             `-hls_time 10`,
             `-hls_list_size 0`,
-            `-hls_segment_filename hls/${segmentFileName}`
+            `-hls_segment_filename hls/${segmentFileName}`,
           ])
-          .output(`hls/${outputFileName}`) //hls intsead of output hls folder is created
-          .on('end', () => resolve())
-          .on('error', (err) => reject(err))
+          .output(`hls/${outputFileName}`)
+          .on("end", () => resolve())
+          .on("error", (err) => reject(err))
           .run();
       });
 
@@ -86,7 +90,7 @@ const s3ToS3 = async (mp4FileName) => {
         resolution,
         outputFileName,
         videoBitrate,
-        audioBitrate
+        audioBitrate,
       });
       console.log(`HLS conversion done for ${resolution}`);
     }
@@ -94,28 +98,32 @@ const s3ToS3 = async (mp4FileName) => {
     console.log(`HLS master m3u8 playlist generating`);
     let masterPlaylist = variantPlaylists
       .map((variantPlaylist) => {
-        const { resolution, outputFileName, videoBitrate, audioBitrate } = variantPlaylist;
-        // Calculate bandwidth more accurately
-        const bandwidth = (parseInt(videoBitrate) + parseInt(audioBitrate)) * 1000;
+        const { resolution, outputFileName, videoBitrate, audioBitrate } =
+          variantPlaylist;
+        const bandwidth =
+          (parseInt(videoBitrate) + parseInt(audioBitrate)) * 1000;
         return `#EXT-X-STREAM-INF:BANDWIDTH=${bandwidth},RESOLUTION=${resolution}\n${outputFileName}`;
       })
-      .join('\n');
+      .join("\n");
 
     masterPlaylist = `#EXTM3U\n` + masterPlaylist;
-    const masterPlaylistFileName = `${mp4FileName.replace('.', '_')}_master.m3u8`;
+    const masterPlaylistFileName = `${mp4FileName.replace(
+      ".",
+      "_"
+    )}_master.m3u8`;
     const masterPlaylistPath = `hls/${masterPlaylistFileName}`;
     fs.writeFileSync(masterPlaylistPath, masterPlaylist);
     console.log(`HLS master m3u8 playlist generated`);
 
     console.log(`Deleting locally downloaded s3 mp4 file`);
-    fs.unlinkSync('local.mp4');
+    fs.unlinkSync("local.mp4");
     console.log(`Deleted locally downloaded s3 mp4 file`);
 
     console.log(`Uploading media m3u8 playlists and ts segments to s3`);
     const files = fs.readdirSync(hlsFolder);
 
     for (const file of files) {
-      if (!file.startsWith(mp4FileName.replace('.', '_'))) {
+      if (!file.startsWith(mp4FileName.replace(".", "_"))) {
         continue;
       }
 
@@ -125,27 +133,31 @@ const s3ToS3 = async (mp4FileName) => {
         Bucket: bucketName,
         Key: `${hlsFolder}/${file}`,
         Body: fileStream,
-        ContentType: file.endsWith('.ts')
-          ? 'video/mp2t'
-          : file.endsWith('.m3u8')
-          ? 'application/x-mpegURL'
-          : 'application/octet-stream'
+        ContentType: file.endsWith(".ts")
+          ? "video/mp2t"
+          : file.endsWith(".m3u8")
+          ? "application/x-mpegURL"
+          : "application/octet-stream",
       };
 
       await s3.upload(uploadParams).promise();
       fs.unlinkSync(filePath);
     }
 
-    console.log(`Uploaded media m3u8 playlists and ts segments to s3. Also deleted locally`);
-    console.log('Success. Time taken: ');
-    console.timeEnd('req_time');
+    console.log(
+      `Uploaded media m3u8 playlists and ts segments to s3. Also deleted locally`
+    );
+    console.log("Success Time taken: ");
+    console.timeEnd("req_time");
+   const transcodedUrl = `https://${bucketName}.s3.${region}.amazonaws.com/hls/${masterPlaylistFileName}`;
+    console.log("transcodedUrl:"+transcodedUrl);
+    return transcodedUrl;
   } catch (error) {
-    console.error('Error:', error);
-    // Clean up any remaining files
-    if (fs.existsSync('local.mp4')) {
-      fs.unlinkSync('local.mp4');
+    console.error("Error:", error);
+
+    if (fs.existsSync("local.mp4")) {
+      fs.unlinkSync("local.mp4");
     }
-    // You might want to add more cleanup here if needed
   }
 };
 

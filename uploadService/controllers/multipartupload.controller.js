@@ -60,7 +60,7 @@ export const uploadChunk = async (req, res) => {
 export const completeUpload = async (req, res) => {
   try {
     console.log("Completing Upload");
-    const { filename, totalChunks, uploadId, title, description, author } =
+    const { filename, totalChunks, uploadId, title, description, author,transcodedurl } =
       req.body;
     const uploadedParts = [];
     // Build uploadedParts array from request body
@@ -95,9 +95,10 @@ export const completeUpload = async (req, res) => {
     console.log("data-----", uploadResult);
     const url = uploadResult.Location;
     console.log("Video uploaded at ", url);
+     pushVideoForEncodingToKafka(title,filename); //need to await
 
-    await addVideoDetailsToDB(title, description, author, url);
-     pushVideoForEncodingToKafka(title,filename);
+    await addVideoDetailsToDB(title, description, author, url,transcodedurl);
+
     PushToOpenSearch(title, description, author, uploadResult.Location);  //pushing non transcoded url, need to push manifest url
     return res.status(200).json({ message: "Uploaded successfully!!!" }); //for that need to await nd from respone need to fetch url , NEED TO DO
   } catch (error) {

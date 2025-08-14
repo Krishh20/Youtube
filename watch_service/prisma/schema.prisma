@@ -16,4 +16,5 @@ datasource db {
  description String?
  author String
  url String
+ transcodedUrl String?
  }

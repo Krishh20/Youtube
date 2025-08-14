@@ -13,7 +13,7 @@
  Key: videoKey,
  Expires: 3600 // URL expires in 1 hour, adjust as needed
  };
- 
+
  return new Promise((resolve, reject) => {
  s3.getSignedUrl('getObject', params, (err, url) => {
  if (err) {
@@ -27,7 +27,9 @@
  const watchVideo = async (req, res) => {
  try {
  const videoKey = req.query.key; // Key of the video file in S3
+ console.log("videokey"+videoKey)
  const signedUrl = await generateSignedUrl(videoKey);
+ console.log("signed url:------------"+{ signedUrl })
  res.json({ signedUrl });
  } catch (err) {
  console.error('Error generating pre-signed URL:', err);

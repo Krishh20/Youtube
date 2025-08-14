@@ -895,6 +895,7 @@ export namespace Prisma {
     description: string | null
     author: string | null
     url: string | null
+    transcodedUrl: string | null
   }
 
   export type VideoDataMaxAggregateOutputType = {
@@ -903,6 +904,7 @@ export namespace Prisma {
     description: string | null
     author: string | null
     url: string | null
+    transcodedUrl: string | null
   }
 
   export type VideoDataCountAggregateOutputType = {
@@ -911,6 +913,7 @@ export namespace Prisma {
     description: number
     author: number
     url: number
+    transcodedUrl: number
     _all: number
   }
 
@@ -929,6 +932,7 @@ export namespace Prisma {
     description?: true
     author?: true
     url?: true
+    transcodedUrl?: true
   }
 
   export type VideoDataMaxAggregateInputType = {
@@ -937,6 +941,7 @@ export namespace Prisma {
     description?: true
     author?: true
     url?: true
+    transcodedUrl?: true
   }
 
   export type VideoDataCountAggregateInputType = {
@@ -945,6 +950,7 @@ export namespace Prisma {
     description?: true
     author?: true
     url?: true
+    transcodedUrl?: true
     _all?: true
   }
 
@@ -1040,6 +1046,7 @@ export namespace Prisma {
     description: string | null
     author: string
     url: string
+    transcodedUrl: string | null
     _count: VideoDataCountAggregateOutputType | null
     _avg: VideoDataAvgAggregateOutputType | null
     _sum: VideoDataSumAggregateOutputType | null
@@ -1067,6 +1074,7 @@ export namespace Prisma {
     description?: boolean
     author?: boolean
     url?: boolean
+    transcodedUrl?: boolean
   }, ExtArgs["result"]["videoData"]>
 
   export type VideoDataSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1075,6 +1083,7 @@ export namespace Prisma {
     description?: boolean
     author?: boolean
     url?: boolean
+    transcodedUrl?: boolean
   }, ExtArgs["result"]["videoData"]>
 
   export type VideoDataSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1083,6 +1092,7 @@ export namespace Prisma {
     description?: boolean
     author?: boolean
     url?: boolean
+    transcodedUrl?: boolean
   }, ExtArgs["result"]["videoData"]>
 
   export type VideoDataSelectScalar = {
@@ -1091,9 +1101,10 @@ export namespace Prisma {
     description?: boolean
     author?: boolean
     url?: boolean
+    transcodedUrl?: boolean
   }
 
-  export type VideoDataOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "author" | "url", ExtArgs["result"]["videoData"]>
+  export type VideoDataOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "author" | "url" | "transcodedUrl", ExtArgs["result"]["videoData"]>
 
   export type $VideoDataPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "VideoData"
@@ -1104,6 +1115,7 @@ export namespace Prisma {
       description: string | null
       author: string
       url: string
+      transcodedUrl: string | null
     }, ExtArgs["result"]["videoData"]>
     composites: {}
   }
@@ -1532,6 +1544,7 @@ export namespace Prisma {
     readonly description: FieldRef<"VideoData", 'String'>
     readonly author: FieldRef<"VideoData", 'String'>
     readonly url: FieldRef<"VideoData", 'String'>
+    readonly transcodedUrl: FieldRef<"VideoData", 'String'>
   }
     
 
@@ -1917,7 +1930,8 @@ export namespace Prisma {
     title: 'title',
     description: 'description',
     author: 'author',
-    url: 'url'
+    url: 'url',
+    transcodedUrl: 'transcodedUrl'
   };
 
   export type VideoDataScalarFieldEnum = (typeof VideoDataScalarFieldEnum)[keyof typeof VideoDataScalarFieldEnum]
@@ -2006,6 +2020,7 @@ export namespace Prisma {
     description?: StringNullableFilter<"VideoData"> | string | null
     author?: StringFilter<"VideoData"> | string
     url?: StringFilter<"VideoData"> | string
+    transcodedUrl?: StringNullableFilter<"VideoData"> | string | null
   }
 
   export type VideoDataOrderByWithRelationInput = {
@@ -2014,6 +2029,7 @@ export namespace Prisma {
     description?: SortOrderInput | SortOrder
     author?: SortOrder
     url?: SortOrder
+    transcodedUrl?: SortOrderInput | SortOrder
   }
 
   export type VideoDataWhereUniqueInput = Prisma.AtLeast<{
@@ -2025,6 +2041,7 @@ export namespace Prisma {
     description?: StringNullableFilter<"VideoData"> | string | null
     author?: StringFilter<"VideoData"> | string
     url?: StringFilter<"VideoData"> | string
+    transcodedUrl?: StringNullableFilter<"VideoData"> | string | null
   }, "id">
 
   export type VideoDataOrderByWithAggregationInput = {
@@ -2033,6 +2050,7 @@ export namespace Prisma {
     description?: SortOrderInput | SortOrder
     author?: SortOrder
     url?: SortOrder
+    transcodedUrl?: SortOrderInput | SortOrder
     _count?: VideoDataCountOrderByAggregateInput
     _avg?: VideoDataAvgOrderByAggregateInput
     _max?: VideoDataMaxOrderByAggregateInput
@@ -2049,6 +2067,7 @@ export namespace Prisma {
     description?: StringNullableWithAggregatesFilter<"VideoData"> | string | null
     author?: StringWithAggregatesFilter<"VideoData"> | string
     url?: StringWithAggregatesFilter<"VideoData"> | string
+    transcodedUrl?: StringNullableWithAggregatesFilter<"VideoData"> | string | null
   }
 
   export type VideoDataCreateInput = {
@@ -2056,6 +2075,7 @@ export namespace Prisma {
     description?: string | null
     author: string
     url: string
+    transcodedUrl?: string | null
   }
 
   export type VideoDataUncheckedCreateInput = {
@@ -2064,6 +2084,7 @@ export namespace Prisma {
     description?: string | null
     author: string
     url: string
+    transcodedUrl?: string | null
   }
 
   export type VideoDataUpdateInput = {
@@ -2071,6 +2092,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     author?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
+    transcodedUrl?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type VideoDataUncheckedUpdateInput = {
@@ -2079,6 +2101,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     author?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
+    transcodedUrl?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type VideoDataCreateManyInput = {
@@ -2087,6 +2110,7 @@ export namespace Prisma {
     description?: string | null
     author: string
     url: string
+    transcodedUrl?: string | null
   }
 
   export type VideoDataUpdateManyMutationInput = {
@@ -2094,6 +2118,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     author?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
+    transcodedUrl?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type VideoDataUncheckedUpdateManyInput = {
@@ -2102,6 +2127,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     author?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
+    transcodedUrl?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -2156,6 +2182,7 @@ export namespace Prisma {
     description?: SortOrder
     author?: SortOrder
     url?: SortOrder
+    transcodedUrl?: SortOrder
   }
 
   export type VideoDataAvgOrderByAggregateInput = {
@@ -2168,6 +2195,7 @@ export namespace Prisma {
     description?: SortOrder
     author?: SortOrder
     url?: SortOrder
+    transcodedUrl?: SortOrder
   }
 
   export type VideoDataMinOrderByAggregateInput = {
@@ -2176,6 +2204,7 @@ export namespace Prisma {
     description?: SortOrder
     author?: SortOrder
     url?: SortOrder
+    transcodedUrl?: SortOrder
   }
 
   export type VideoDataSumOrderByAggregateInput = {

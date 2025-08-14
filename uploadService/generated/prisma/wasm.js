@@ -125,7 +125,8 @@ exports.Prisma.VideoDataScalarFieldEnum = {
   title: 'title',
   description: 'description',
   author: 'author',
-  url: 'url'
+  url: 'url',
+  transcodedUrl: 'transcodedUrl'
 };
 
 exports.Prisma.SortOrder = {
