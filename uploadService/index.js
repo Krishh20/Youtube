@@ -2,8 +2,7 @@ import express from "express"
 import uploadRouter from "./routes/upload.route.js"
 import cors from "cors"
 import dotenv from "dotenv"
-import kafkaPublisherRouter from "./routes/kafkapublisher.route.js"
-import KafkaConfig from "./kafka/kafka.js"
+import { startTranscodedUrlConsumer  } from "./controllers/kafkaconsumer.controller.js";
 dotenv.config();
 
 const app=express();
@@ -14,7 +13,8 @@ app.use(cors({
 }))
 app.use(express.json())
 app.use("/upload",uploadRouter)
-app.use('/publish', kafkaPublisherRouter);
+
+startTranscodedUrlConsumer();
 
 app.get("/",(req,res)=>{
     res.json({

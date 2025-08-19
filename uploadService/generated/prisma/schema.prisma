@@ -17,4 +17,5 @@ model VideoData {
   author        String
   url           String
   transcodedUrl String?
+  filename      String  @unique // optional first
 }

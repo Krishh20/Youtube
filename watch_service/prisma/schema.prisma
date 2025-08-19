@@ -9,12 +9,13 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+model VideoData {
+  id            Int     @id @default(autoincrement())
+  title         String
+  description   String?
+  author        String
+  url           String
+  transcodedUrl String?
+  filename      String?   // optional first
+}
 
- model VideoData {
- id Int @id @default(autoincrement())
- title String
- description String?
- author String
- url String
- transcodedUrl String?
- }

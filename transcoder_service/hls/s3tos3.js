@@ -149,7 +149,8 @@ const s3ToS3 = async (mp4FileName) => {
     );
     console.log("Success Time taken: ");
     console.timeEnd("req_time");
-   const transcodedUrl = `https://${bucketName}.s3.${region}.amazonaws.com/hls/${masterPlaylistFileName}`;
+  const transcodedUrl = `https://${bucketName}.s3.${process.env.AWS_REGION}.amazonaws.com/hls/${masterPlaylistFileName}`
+;
     console.log("transcodedUrl:"+transcodedUrl);
     return transcodedUrl;
   } catch (error) {
@@ -162,3 +163,4 @@ const s3ToS3 = async (mp4FileName) => {
 };
 
 export default s3ToS3;
+// "https://hhld-classes.s3.ap-south-1.amazonaws.com/output/test_mp4_master.m3u8"

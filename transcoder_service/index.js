@@ -20,7 +20,7 @@ app.get("/",(req,res)=>{
 })
 
 
- const kafkaconfig = new KafkaConfig()
+ const kafkaconfig = new KafkaConfig("upload-service", "upload-group")
  kafkaconfig.consume("transcode", async (message) => {
  try {
  console.log("Got data from Kafka:", message);
@@ -30,7 +30,7 @@ app.get("/",(req,res)=>{
  if (value && value.filename) {
  console.log("Filename is", value.filename);
  const transcodedUrl= await s3ToS3(value.filename);
-   pushTranscodedVideo(value.title,transcodedUrl)
+   pushTranscodedVideo(value.filename,transcodedUrl)
  } else {
  console.log("Didn't receive filename to be picked from S3");
  }
@@ -41,15 +41,15 @@ app.get("/",(req,res)=>{
  });
 
 
- const pushTranscodedVideo =async(title,url)=>{
+ const pushTranscodedVideo =async(filename,url)=>{
    try {
  const message ={
-    "title":title,
+    "filename":filename,
     "url":url
  }
  console.log("body : ", message)
 
- const kafkaconfig = new KafkaConfig()
+ const kafkaconfig = new KafkaConfig("transcoder-service", "transcoder-group")
 
  const msgs = [
  {

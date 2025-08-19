@@ -2,14 +2,14 @@
 import { Kafka } from "kafkajs";
 
 class KafkaConfig {
-  constructor() {
+  constructor(clientId, groupId) {
     this.kafka = new Kafka({
-      clientId: "you-tube",
+      clientId: clientId,
       brokers: ["localhost:9092"], // Connect via localhost
       connectionTimeout: 10000,
     });
     this.producer = this.kafka.producer();
-    this.consumer = this.kafka.consumer({ groupId: "youtube-uploader" });
+    this.consumer = this.kafka.consumer({ groupId: groupId });
   }
   async produce(topic, messages) {
     try {
