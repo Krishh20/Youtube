@@ -41,68 +41,78 @@ const YouTubeHome = () => {
               className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4
  xl:grid-cols-5 gap-4 m-10"
             >
-              {searchedVideos?.length > 0 &&searchedVideos.map((video) => (
-                <div
-                  key={video._source._id}
-                  className="border rounded-md overflow-hidden"
-                >
-                  <div>
-                        {
-                    video.transcodedUrl? <VideoPlayer transcodedUrl={video.transcodedUrl}></VideoPlayer>: <ReactPlayer
-                      url={video.url}
-                      width="360px"
-                      height="180px"
-                      controls={true}
-                    />
-                   }
-                  </div>
-                  <div className="p-4">
-                    <h2
-                      className="text-lg font-semibold
+              {searchedVideos?.length > 0 &&
+                searchedVideos.map((video) => (
+                  <div
+                    key={video._source._id}
+                    className="border rounded-md overflow-hidden"
+                  >
+                    <div>
+                      {video.transcodedUrl ? (
+                        <VideoPlayer
+                          transcodedUrl={video.transcodedUrl}
+                        ></VideoPlayer>
+                      ) : (
+                        <ReactPlayer
+                          url={video.url}
+                          width="360px"
+                          height="180px"
+                          controls={true}
+                        />
+                      )}
+                    </div>
+                    <div className="p-4">
+                      <h2
+                        className="text-lg font-semibold
  mb-2"
-                    >
-                      {video._source.title}
-                    </h2>
-                    <p className="text-gray-700">
-                      Author
-                      {video._source.author}
-                    </p>
-                    <p className="text-gray-700">{video._source.description}</p>
+                      >
+                        {video._source.title}
+                      </h2>
+                      <p className="text-gray-700">
+                        Author
+                        {video._source.author}
+                      </p>
+                      <p className="text-gray-700">
+                        {video._source.description}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
             </div>
             <div
-              className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3
- lg:grid-cols-4 xl:grid-cols-5 gap-4 m-10"
+              className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 m-10"
             >
-              {videos?.length> 0 && videos.map((video) => (
-                <div
-                  key={video.id}
-                  className="border rounded-md overflow-hidden"
-                >
-                  <div>
-                   {
-                    video.transcodedUrl? <VideoPlayer transcodedUrl={video.transcodedUrl}></VideoPlayer>: <ReactPlayer
-                      url={video.url}
-                      width="360px"
-                      height="180px"
-                      controls={true}
-                    />
-                   }
+              {videos?.length > 0 &&
+                videos.map((video) => (
+                  <div
+                    key={video.id}
+                    className="border rounded-md overflow-hidden"
+                  >
+                    <div>
+                      {video.transcodedUrl ? (
+                        <VideoPlayer
+                          transcodedUrl={video.transcodedUrl}
+                        ></VideoPlayer>
+                      ) : (
+                        <ReactPlayer
+                          url={video.url}
+                          width="360px"
+                          height="180px"
+                          controls={true}
+                        />
+                      )}
+                    </div>
+                    <div className="p-4">
+                      <h2
+                        className="text-lg font-semibold mb-2"
+                      >
+                        {video.title}
+                      </h2>
+                      <p className="text-gray-700">Author -{video.author}</p>
+                      <p className="text-gray-700">{video.description}</p>
+                    </div>
                   </div>
-                  <div className="p-4">
-                    <h2
-                      className="text-lg font-semibold
-mb-2"
-                    >
-                      {video.title}
-                    </h2>
-                    <p className="text-gray-700">Author -{video.author}</p>
-                    <p className="text-gray-700">{video.description}</p>
-                  </div>
-                </div>
-              ))}
+                ))}
             </div>
           </div>
         )}

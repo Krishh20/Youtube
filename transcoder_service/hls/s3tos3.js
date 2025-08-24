@@ -149,7 +149,7 @@ const s3ToS3 = async (mp4FileName) => {
     );
     console.log("Success Time taken: ");
     console.timeEnd("req_time");
-  const transcodedUrl = `https://${bucketName}.s3.${process.env.AWS_REGION}.amazonaws.com/hls/${masterPlaylistFileName}`
+  const transcodedUrl = `https://s3.${process.env.AWS_REGION}.amazonaws.com/${process.env.AWS_BUCKET}/hls/${masterPlaylistFileName}`
 ;
     console.log("transcodedUrl:"+transcodedUrl);
     return transcodedUrl;
