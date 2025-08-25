@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import NavBar from "../components/navbar";
 import { useVideosStore } from "../zustand/useVideosStore";
 import VideoPlayer from "./videoplayer";
+import Link from "next/link";
 const ReactPlayer = dynamic(() => import("react-player"), { ssr: false }); //for playing video and dynamic for only client side rendering
 const YouTubeHome = () => {
   const [videos, setVideos] = useState([]);
@@ -79,9 +80,7 @@ const YouTubeHome = () => {
                   </div>
                 ))}
             </div>
-            <div
-              className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 m-10"
-            >
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 m-10">
               {videos?.length > 0 &&
                 videos.map((video) => (
                   <div
@@ -89,23 +88,32 @@ const YouTubeHome = () => {
                     className="border rounded-md overflow-hidden"
                   >
                     <div>
-                      {video.transcodedUrl ? (
-                        <VideoPlayer
-                          transcodedUrl={video.transcodedUrl}
-                        ></VideoPlayer>
-                      ) : (
-                        <ReactPlayer
-                          url={video.url}
-                          width="360px"
-                          height="180px"
-                          controls={true}
-                        />
-                      )}
-                    </div>
-                    <div className="p-4">
-                      <h2
-                        className="text-lg font-semibold mb-2"
+                      <Link
+                        href={`/watch/${video.id || video._source?._id}`}
+                        className="block"
                       >
+                        {/* {video.transcodedUrl ? (
+                          <VideoPlayer transcodedUrl={video.transcodedUrl} />
+                        ) : (
+                          <ReactPlayer
+                            url={video.url}
+                            width="360px"
+                            height="180px"
+                            controls={true}
+                          />
+                        )} */}
+                         <ReactPlayer
+                            url={video.url}
+                            width="360px"
+                            height="180px"
+                            controls={true}
+                          />
+
+                      </Link>
+                    </div>
+
+                    <div className="p-4">
+                      <h2 className="text-lg font-semibold mb-2">
                         {video.title}
                       </h2>
                       <p className="text-gray-700">Author -{video.author}</p>

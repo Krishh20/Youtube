@@ -25,6 +25,6 @@ console.log("hi from video player")
  // Play from the original video file
  }
  }, [src]);
-return <video ref={videoRef} controls />;
+return <video ref={videoRef} controls  className='w-[720px] h-[400px]'/>;
  };
  export default VideoPlayer;

@@ -3,6 +3,12 @@
  const prisma = new PrismaClient()
 
 
+// import { PrismaClient } from '@prisma/client';
+
+// const prisma = new PrismaClient();
+
+export default prisma;
+
   export async function updateVideoUrlInDB(filename, transcodedUrl) {
   console.log("---- ENTERED updateVideoUrlInDB ----");
   console.log("Inputs => filename:", filename, " transcodedUrl:", transcodedUrl);

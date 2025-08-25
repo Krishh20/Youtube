@@ -1,7 +1,8 @@
-import {PrismaClient} from '../generated/prisma/client.js'
+ import { PrismaClient } from "../generated/prisma/client.js";
+ const prisma = new PrismaClient()
 
  const getAllVideos = async(req, res) => {
- const prisma = new PrismaClient();
+//  const prisma = new PrismaClient();
  try {
  const allData = await prisma.$queryRaw`SELECT * FROM "VideoData"`;
  console.log(allData);
