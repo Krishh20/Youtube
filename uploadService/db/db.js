@@ -1,5 +1,6 @@
  // db/db.js
  import { PrismaClient } from "../generated/prisma/client.js";
+ import PushToOpenSearch from "../opensearch/pushToOpenSearch.js";
  const prisma = new PrismaClient()
 
 
@@ -18,7 +19,14 @@ export default prisma;
       where: { filename },
       data: { transcodedUrl },
     });
-
+        await PushToOpenSearch(
+      updatedVideo.id,
+      updatedVideo.title,
+      updatedVideo.description,
+      updatedVideo.author,
+      updatedVideo.transcodedUrl,
+      filename
+    );
     console.log("DB update SUCCESS ", updatedVideo);
     return updatedVideo;
   } catch (err) {

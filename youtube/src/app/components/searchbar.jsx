@@ -12,11 +12,11 @@ const SearchBar = () => {
         { params: { q: searchText } }
       );
       console.log("Data received-", res.data);
-      updateSearchedVideos(res.data);
-      res.data.map((data) => {
-        console.log(data);
-        console.log("video url", data._source.videoUrl);
-      });
+       updateSearchedVideos(res.data.data);
+       res.data.data.map((video) => {
+      console.log(video);
+      console.log("video url", video.videoUrl); // <-- not _source.videoUrl
+    });
     } catch (error) {
       console.log("Error in searching : ", error.message);
     }

@@ -14,18 +14,19 @@
   }
  });
  var index_name = "video";
- var document = {
- title: title,
- author: author,
- description: description,
- videoUrl: videoUrl
- };
- var response = await client.index({
- id: title, // id should ideally be db id
- index: index_name,
- body: document,
- refresh: true,
- });
+    let document = {
+      title: title,
+      author: author,
+      description: description,
+      videoUrl: videoUrl,
+      filename:filename
+    };
+   let response = await client.index({
+      id: id,
+      index: index_name,
+      body: document,
+      refresh: true,
+    });
  console.log("Adding document:");
  console.log(response.body);
  } catch (error) {

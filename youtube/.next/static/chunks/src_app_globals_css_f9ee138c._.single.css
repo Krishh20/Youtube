@@ -53,7 +53,6 @@
     --spacing: .25rem;
     --breakpoint-xl: 80rem;
     --container-lg: 32rem;
-    --container-3xl: 48rem;
     --text-sm: .875rem;
     --text-sm--line-height: calc(1.25 / .875);
     --text-lg: 1.125rem;
@@ -291,16 +290,8 @@
     inset-inline-end: calc(var(--spacing) * 2.5);
   }
 
-  .top-0 {
-    top: calc(var(--spacing) * 0);
-  }
-
   .bottom-2\.5 {
     bottom: calc(var(--spacing) * 2.5);
-  }
-
-  .left-0 {
-    left: calc(var(--spacing) * 0);
   }
 
   .container {
@@ -365,14 +356,6 @@
     margin-inline-end: calc(var(--spacing) * 2);
   }
 
-  .mt-2 {
-    margin-top: calc(var(--spacing) * 2);
-  }
-
-  .mt-5 {
-    margin-top: calc(var(--spacing) * 5);
-  }
-
   .mb-2 {
     margin-bottom: calc(var(--spacing) * 2);
   }
@@ -397,10 +380,6 @@
     display: none;
   }
 
-  .h-0 {
-    height: calc(var(--spacing) * 0);
-  }
-
   .h-4 {
     height: calc(var(--spacing) * 4);
   }
@@ -409,20 +388,12 @@
     height: calc(var(--spacing) * 10);
   }
 
+  .h-\[180px\] {
+    height: 180px;
+  }
+
   .h-\[400px\] {
     height: 400px;
-  }
-
-  .h-\[450px\] {
-    height: 450px;
-  }
-
-  .h-\[500px\] {
-    height: 500px;
-  }
-
-  .h-full {
-    height: 100%;
   }
 
   .h-screen {
@@ -437,20 +408,20 @@
     width: calc(var(--spacing) * 10);
   }
 
-  .w-\[5px\] {
-    width: 5px;
+  .w-\[00px\] {
+    width: 0;
   }
 
-  .w-\[500px\] {
-    width: 500px;
+  .w-\[360px\] {
+    width: 360px;
+  }
+
+  .w-\[700px\] {
+    width: 700px;
   }
 
   .w-\[720px\] {
     width: 720px;
-  }
-
-  .w-\[800px\] {
-    width: 800px;
   }
 
   .w-\[px\] {
@@ -459,10 +430,6 @@
 
   .w-full {
     width: 100%;
-  }
-
-  .max-w-3xl {
-    max-width: var(--container-3xl);
   }
 
   .max-w-lg {
@@ -561,10 +528,6 @@
     padding: calc(var(--spacing) * 4);
   }
 
-  .p-5 {
-    padding: calc(var(--spacing) * 5);
-  }
-
   .p-10 {
     padding: calc(var(--spacing) * 10);
   }
@@ -595,10 +558,6 @@
 
   .ps-10 {
     padding-inline-start: calc(var(--spacing) * 10);
-  }
-
-  .pb-\[56\.25\%\] {
-    padding-bottom: 56.25%;
   }
 
   .text-center {
@@ -653,11 +612,6 @@
 
   .text-white {
     color: var(--color-white);
-  }
-
-  .shadow-lg {
-    --tw-shadow: 0 10px 15px -3px var(--tw-shadow-color, #0000001a), 0 4px 6px -4px var(--tw-shadow-color, #0000001a);
-    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
   }
 
   @media (hover: hover) {

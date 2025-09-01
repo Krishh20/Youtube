@@ -1,7 +1,7 @@
 "use client"
  import React, { useRef, useEffect } from 'react';
  import Hls from 'hls.js';
- const VideoPlayer = ({transcodedUrl}) => {
+ const VideoPlayer = ({transcodedUrl, height="400px",width="720px"}) => {
  const videoRef = useRef(null);
  const src = transcodedUrl
 //  "https://s3.ap-south-1.amazonaws.com/krishnaveni.aws.s3.bucket/hls/test_mp4_master.m3u8"
@@ -25,6 +25,6 @@ console.log("hi from video player")
  // Play from the original video file
  }
  }, [src]);
-return <video ref={videoRef} controls  className='w-[720px] h-[400px]'/>;
+return <video ref={videoRef} controls  className={`${height} ${width}`}/>;
  };
  export default VideoPlayer;

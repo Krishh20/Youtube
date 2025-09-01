@@ -149,10 +149,10 @@ const SearchBar = ()=>{
                 }
             });
             console.log("Data received-", res.data);
-            updateSearchedVideos(res.data);
-            res.data.map((data)=>{
-                console.log(data);
-                console.log("video url", data._source.videoUrl);
+            updateSearchedVideos(res.data.data);
+            res.data.data.map((video)=>{
+                console.log(video);
+                console.log("video url", video.videoUrl); // <-- not _source.videoUrl
             });
         } catch (error) {
             console.log("Error in searching : ", error.message);
@@ -417,7 +417,7 @@ var _s = __turbopack_context__.k.signature();
 "use client";
 ;
 ;
-const VideoPlayer = ({ transcodedUrl })=>{
+const VideoPlayer = ({ transcodedUrl, height = "400px", width = "720px" })=>{
     _s();
     const videoRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
     const src = transcodedUrl;
@@ -450,7 +450,7 @@ const VideoPlayer = ({ transcodedUrl })=>{
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("video", {
         ref: videoRef,
         controls: true,
-        className: "w-[720px] h-[400px]"
+        className: `${height} ${width}`
     }, void 0, false, {
         fileName: "[project]/src/app/pages/videoplayer.jsx",
         lineNumber: 28,
@@ -548,68 +548,70 @@ const YouTubeHome = ()=>{
                                     className: "border rounded-md overflow-hidden",
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            children: video.transcodedUrl ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$pages$2f$videoplayer$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                                                transcodedUrl: video.transcodedUrl
+                                            children: video.videoUrl ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$pages$2f$videoplayer$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                                                height: "h-[180px]",
+                                                width: "w-[360px]",
+                                                transcodedUrl: video.videoUrl
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/pages/youtubehome.jsx",
-                                                lineNumber: 53,
-                                                columnNumber: 25
+                                                lineNumber: 50,
+                                                columnNumber: 11
                                             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(ReactPlayer, {
-                                                url: video.url,
+                                                url: video.videoUrl,
                                                 width: "360px",
                                                 height: "180px",
                                                 controls: true
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/pages/youtubehome.jsx",
-                                                lineNumber: 57,
-                                                columnNumber: 25
+                                                lineNumber: 52,
+                                                columnNumber: 11
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/pages/youtubehome.jsx",
-                                            lineNumber: 51,
-                                            columnNumber: 21
+                                            lineNumber: 48,
+                                            columnNumber: 7
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             className: "p-4",
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                                                    className: "text-lg font-semibold   mb-2",
-                                                    children: video._source.title
+                                                    className: "text-lg font-semibold mb-2",
+                                                    children: video.title
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/pages/youtubehome.jsx",
-                                                    lineNumber: 66,
-                                                    columnNumber: 23
+                                                    lineNumber: 61,
+                                                    columnNumber: 9
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                     className: "text-gray-700",
                                                     children: [
-                                                        "Author",
-                                                        video._source.author
+                                                        "Author: ",
+                                                        video.author
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/app/pages/youtubehome.jsx",
-                                                    lineNumber: 72,
-                                                    columnNumber: 23
+                                                    lineNumber: 64,
+                                                    columnNumber: 9
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                     className: "text-gray-700",
-                                                    children: video._source.description
+                                                    children: video.description
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/pages/youtubehome.jsx",
-                                                    lineNumber: 76,
-                                                    columnNumber: 23
+                                                    lineNumber: 65,
+                                                    columnNumber: 9
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/app/pages/youtubehome.jsx",
-                                            lineNumber: 65,
-                                            columnNumber: 21
+                                            lineNumber: 60,
+                                            columnNumber: 7
                                         }, this)
                                     ]
-                                }, video._source._id, true, {
+                                }, video._id || video.id, true, {
                                     fileName: "[project]/src/app/pages/youtubehome.jsx",
                                     lineNumber: 47,
-                                    columnNumber: 19
+                                    columnNumber: 5
                                 }, this))
                         }, void 0, false, {
                             fileName: "[project]/src/app/pages/youtubehome.jsx",
@@ -632,17 +634,17 @@ const YouTubeHome = ()=>{
                                                     controls: true
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/pages/youtubehome.jsx",
-                                                    lineNumber: 105,
+                                                    lineNumber: 93,
                                                     columnNumber: 26
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/pages/youtubehome.jsx",
-                                                lineNumber: 91,
+                                                lineNumber: 79,
                                                 columnNumber: 23
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/pages/youtubehome.jsx",
-                                            lineNumber: 90,
+                                            lineNumber: 78,
                                             columnNumber: 21
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -653,7 +655,7 @@ const YouTubeHome = ()=>{
                                                     children: video.title
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/pages/youtubehome.jsx",
-                                                    lineNumber: 116,
+                                                    lineNumber: 104,
                                                     columnNumber: 23
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -664,7 +666,7 @@ const YouTubeHome = ()=>{
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/app/pages/youtubehome.jsx",
-                                                    lineNumber: 119,
+                                                    lineNumber: 107,
                                                     columnNumber: 23
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -672,24 +674,24 @@ const YouTubeHome = ()=>{
                                                     children: video.description
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/pages/youtubehome.jsx",
-                                                    lineNumber: 120,
+                                                    lineNumber: 108,
                                                     columnNumber: 23
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/app/pages/youtubehome.jsx",
-                                            lineNumber: 115,
+                                            lineNumber: 103,
                                             columnNumber: 21
                                         }, this)
                                     ]
                                 }, video.id, true, {
                                     fileName: "[project]/src/app/pages/youtubehome.jsx",
-                                    lineNumber: 86,
+                                    lineNumber: 74,
                                     columnNumber: 19
                                 }, this))
                         }, void 0, false, {
                             fileName: "[project]/src/app/pages/youtubehome.jsx",
-                            lineNumber: 83,
+                            lineNumber: 71,
                             columnNumber: 13
                         }, this)
                     ]
