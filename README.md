@@ -18,9 +18,11 @@ The platform supports chunked uploads to AWS S3, Kafka-driven FFmpeg transcoding
 ## ✨ Features
 
 * 🎥 **Chunked Video Uploads** — Reliable multipart uploads to AWS S3.
-* ⚡ **Serverless Transcoding** — FFmpeg pipeline triggered via Kafka messages.
+* ⚡ **Kafka** — Message queue for transcoding & HLS processing pipeline.
+*  🎞 **FFmpeg** — Converts raw uploads into adaptive bitrate `.m3u8 / .ts` streams
 * ☁️ **S3 Storage** — Store raw and processed video assets.
 * 📡 **Adaptive Streaming (HLS)** — Smooth playback with `.m3u8` and `.ts` segments.
+*  🔎 **OpenSearch** — Video metadata indexing & fast full-text search
 * 🔍 **Real-Time Search** — Lambda + API Gateway for querying video metadata.
 * 🧩 **Microservice Architecture** — Decoupled upload, transcoder, and watch services.
 * 📈 **Scalable** — Handles thousands of concurrent uploads and streams.
