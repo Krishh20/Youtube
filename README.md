@@ -45,7 +45,7 @@ The platform supports chunked uploads to AWS S3, Kafka-driven FFmpeg transcoding
 ### 🛠 Infrastructure
 
 * **AWS S3** — Video file storage
- **OpenSearch** — Video metadata indexing & fast full-text search
+* **OpenSearch** — Video metadata indexing & fast full-text search
 * **AWS Lambda + API Gateway** — Serverless search handler that queries OpenSearch
 
 ---
