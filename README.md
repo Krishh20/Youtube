@@ -105,6 +105,12 @@ DATABASE_URL=postgresql://user:password@localhost:5432/video_streaming_db
 
 ---
 
+## 🎥 Demo Video
+
+Click below to watch the demo:
+
+[▶️ Watch Youtube Clone Demo]()
+
 ## ⚠ Disclaimer
 
 This project is a custom-built platform for learning, experimentation, and scaling full-stack video streaming systems. **Not affiliated with YouTube or any third party**.
